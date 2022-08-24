@@ -18,19 +18,26 @@ namespace SnakeLadderProb
         }
         public void Play()
         {
-            int Option = random.Next(0, 3);
-            switch (Option)
+            while (PlayerPosition < 100)
             {
-                case NO_PLAY:
-                    PlayerPosition += 0;
-                    break;
-                case LADDER:
-                    PlayerPosition +=DieRoll();
-                    break;
-                case SNAKE:
-                    PlayerPosition -=DieRoll();
-                    break;
-            }
+                int Option = random.Next(0, 3);
+                switch (Option)
+                {
+                    case NO_PLAY:
+                        PlayerPosition += 0;
+                        break;
+                    case LADDER:
+                        PlayerPosition += DieRoll();
+                        break;
+                    case SNAKE:
+                        PlayerPosition -= DieRoll();
+                        if (PlayerPosition < 0)
+                        {
+                            PlayerPosition = 0;
+                        }
+                        break;
+                }
+            }       
             Console.WriteLine(PlayerPosition);
         }
     }    
