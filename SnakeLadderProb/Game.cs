@@ -9,7 +9,7 @@ namespace SnakeLadderProb
     internal class Game
     {
         int PlayerPosition = 0;
-        const int NO_PLAY = 0, LADDER = 1, SNAKE = 2;
+        const int NO_PLAY = 0, LADDER = 1, SNAKE = 2, WINNING_POSITION = 100;
         Random random = new Random();
         public int  DieRoll()
         {
@@ -27,7 +27,12 @@ namespace SnakeLadderProb
                         PlayerPosition += 0;
                         break;
                     case LADDER:
-                        PlayerPosition += DieRoll();
+                        int die = DieRoll();
+                        PlayerPosition += die;
+                        if(PlayerPosition > 100)
+                        {
+                            PlayerPosition -= die;
+                        }
                         break;
                     case SNAKE:
                         PlayerPosition -= DieRoll();
@@ -37,8 +42,11 @@ namespace SnakeLadderProb
                         }
                         break;
                 }
-            }       
-            Console.WriteLine(PlayerPosition);
+            }
+            if (PlayerPosition == WINNING_POSITION)
+            {
+                Console.WriteLine(PlayerPosition);
+            } 
         }
     }    
 }
